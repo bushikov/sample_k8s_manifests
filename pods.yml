@@ -1,0 +1,14 @@
+# 中入って、`apk update && apk add curl`して、サーバーにアクセスしてみて動作確認する
+apiVersion: v1
+kind: Pod
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  containers:
+  - name: server
+    # webrick同梱の最終バージョン2.7.8を使う
+    image: ruby:2.7.8-alpine
+    command: ["ruby"]
+    args: ["-rwebrick", "-e", "WEBrick::HTTPServer.new(DocumentRoot: '/', Port: 3000).start"]
